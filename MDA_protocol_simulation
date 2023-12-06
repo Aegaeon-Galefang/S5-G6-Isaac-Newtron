@@ -31,6 +31,9 @@ p20_single = protocol.load_instrument('p20_single_gen2', 'right', tip_racks=[tip
 
 #protocol
 mag_deck.engage(height_from_base = 5)
+temp_deck.set_temperature(celsius=25)
+protocol.delay(minutes=5)
+
 
 for line in protocol.commands(): 
     print(line)
