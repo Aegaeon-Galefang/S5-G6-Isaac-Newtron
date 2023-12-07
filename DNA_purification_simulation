@@ -7,43 +7,45 @@ metadata = {
     }
 
 #labware
+
 mag_deck = protocol.load_module('magnetic module', 1)
-#mag_adapter = mag_deck.load_adapter('opentrons_96_flat_bottom_adapter')
+mag_adapter = mag_deck.load_adapter('opentrons_96_flat_bottom_adapter')
 mag_plate = mag_deck.load_labware('corning_96_wellplate_360ul_flat')
 
+sample_plate = protocol.load_labware('corning_96_wellplate_360ul_flat', 2)
+mix_plate = protocol.load_labware('corning_96_wellplate_360ul_flat', 3)
 
-mix_plate = protocol.load_labware('corning_96_wellplate_360ul_flat', 2)
-
-temp_deck = protocol.load_module('temperature module', 3)
+temp_deck = protocol.load_module('temperature module', 4)
 #temp_adapter = temp_deck.load_adapter('opentrons_96_flat_bottom_adapter')
 temp_plate = temp_deck.load_labware('corning_96_wellplate_360ul_flat')
 
-tiprack_300 = protocol.load_labware('opentrons_96_tiprack_300ul', 4)
-tiprack_20 = protocol.load_labware('opentrons_96_tiprack_20ul', 5)
-reservoir = protocol.load_labware('corning_96_wellplate_360ul_flat', 6)
+tiprack_300 = protocol.load_labware('opentrons_96_tiprack_300ul', 5)
+tiprack_20 = protocol.load_labware('opentrons_96_tiprack_20ul', 6)
+reservoir = protocol.load_labware('corning_96_wellplate_360ul_flat', 9)
+
+tc = protocol.load_module('thermocycler')
+tc_plate = tc.load_labware(name='nest_96_wellplate_100ul_pcr_full_skirt')
 
 #pipettes
 p300_multi = protocol.load_instrument('p300_multi_gen2', 'left', tip_racks=[tiprack_300])
 p20_single = protocol.load_instrument('p20_single_gen2', 'right', tip_racks=[tiprack_20])
 
 
-#protocol
-mag_deck.engage(height_from_base = 5)
-temp_deck.set_temperature(celsius=25)
-protocol.delay(minutes=5)
-
-#DNA purification
+#protocol - DNA purification
 bead_volume = 1.8*22 #bead ratio multipled by sample volume
-p300_multi.transfer(bead_volume, reservoir.wells('A1'), mag_plate.wells('A1'), #where are the beads? where are the MDA samples?
+p300_multi.transfer(bead_volume, reservoir.wells('A1'), sample_plate.wells('A1'), #where are the beads? where are the MDA samples?
                     touch_tip=True, blow_out=True, new_tip='always', 
                     mix_before=(5,22), mix_after=(10,22))
+
+p300_multi.transfer(bead_volume+22+5, sample_plate.wells('A1'), mag_plate.wells('A1'), blow_out=True, touch_tip=True)
 
 protocol.delay(minutes = 1)
 mag_deck.engage(height_from_base = 5)
 protocol.delay(minutes = 2)
 
+
 p300_multi.flow_rate.aspirate = 25 #aspirate slowly to avoid aspirating beads
-p300_multi.transfer(bead_volume+22, mag_plate.wells('A1'), mag_plate.wells('A2'), blow_out=True) #dispose this liquid waste somewhere else?
+p300_multi.transfer(bead_volume+22+5, mag_plate.wells('A1'), mag_plate.wells('A2'), blow_out=True) #dispose this liquid waste somewhere else?
 
 air_volume = p300_multi.max_volume * 0.1 #adding air gap to prevent dripping of ethanol
 
