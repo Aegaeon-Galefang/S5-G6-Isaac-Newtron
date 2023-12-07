@@ -17,7 +17,7 @@ def run(protocol: protocol_api.ProtocolContext):
     
     tiprack_300 = protocol.load_labware('opentrons_96_tiprack_300ul', 5)
     tiprack_20 = protocol.load_labware('opentrons_96_tiprack_20ul', 6)
-    reservoir = protocol.load_labware('costar3370flatbottomtransparent_96_wellplate_200ul', 9)
+    reservoir = protocol.load_labware('4ti0131_12_reservoir_21000ul', 9)
     #A1 = cell + media
     #A2 = MDA Reaction buffer
     #A3 = Enzyme mixture
