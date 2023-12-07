@@ -12,7 +12,6 @@ def run(protocol: protocol_api.ProtocolContext):
     
     # Labware setup
     sample_plate = protocol.load_labware('costar3370flatbottomtransparent_96_wellplate_200ul', 2)
-    mix_plate = protocol.load_labware('costar3370flatbottomtransparent_96_wellplate_200ul', 3)
     
     temp_deck = protocol.load_module('temperature module', 4)
     temp_plate = temp_deck.load_labware('opentrons_24_aluminumblock_nest_2ml_snapcap')
