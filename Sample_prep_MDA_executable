@@ -2,7 +2,7 @@ from opentrons import protocol_api
 
 metadata = {
     "apiLevel": "2.15",
-    "protocolName": "MDA protocol",
+    "protocolName": "Sample_prep_MDA protocol",
     }
 
 def run(protocol: protocol_api.ProtocolContext):
