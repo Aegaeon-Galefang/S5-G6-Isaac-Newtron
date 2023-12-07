@@ -14,7 +14,7 @@ def run(protocol: protocol_api.ProtocolContext):
     sample_plate = protocol.load_labware('costar3370flatbottomtransparent_96_wellplate_200ul', 2)
     
     temp_deck = protocol.load_module('temperature module', 4)
-    temp_plate = temp_deck.load_labware('opentrons_24_aluminumblock_nest_2ml_snapcap')
+    temp_plate = temp_deck.load_labware('opentrons_24_aluminumblock_nest_1.5ml_snapcap')
     
     tiprack_300 = protocol.load_labware('opentrons_96_tiprack_300ul', 5)
     tiprack_20 = protocol.load_labware('opentrons_96_tiprack_20ul', 6)
@@ -38,8 +38,10 @@ def run(protocol: protocol_api.ProtocolContext):
     
     #preparing reaction buffer and enzyme mixture
     temp_deck.set_temperature(celsius=4)
+    p20_single.pick_up_tip()
     p20_single.transfer(180, reservoir['A2'], temp_plate['A6'],
-                        blow_out=True, touch_tip=True, new_tip='always')
+                        blow_out=True, touch_tip=True, new_tip='never')
+    p20_single.drop_tip()
     p20_single.transfer(20, reservoir['A3'], temp_plate['A5'],
                         blow_out=True, touch_tip=True, new_tip='always')
                         
