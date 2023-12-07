@@ -12,14 +12,14 @@ def run(protocol: protocol_api.ProtocolContext):
     
     # Labware setup
     sample_plate = protocol.load_labware('costar3370flatbottomtransparent_96_wellplate_200ul', 2)
-    mix_plate = protocol.load_labware('ccostar3370flatbottomtransparent_96_wellplate_200ul    ', 3)
+    mix_plate = protocol.load_labware('costar3370flatbottomtransparent_96_wellplate_200ul', 3)
     
     temp_deck = protocol.load_module('temperature module', 4)
     temp_plate = temp_deck.load_labware('opentrons_24_aluminumblock_nest_2ml_snapcap')
     
     tiprack_300 = protocol.load_labware('opentrons_96_tiprack_300ul', 5)
     tiprack_20 = protocol.load_labware('opentrons_96_tiprack_20ul', 6)
-    reservoir = protocol.load_labware('corning_96_wellplate_360ul_flat', 9)
+    reservoir = protocol.load_labware('costar3370flatbottomtransparent_96_wellplate_200ul', 9)
     #A1 = cell + media
     #A2 = MDA Reaction buffer
     #A3 = Enzyme mixture
@@ -28,7 +28,7 @@ def run(protocol: protocol_api.ProtocolContext):
     #A6 = Elution buffer
     #A7 = Liquid waste
     tc = protocol.load_module('thermocycler')
-    tc_plate = tc.load_labware(name='nest_96_wellplate_100ul_pcr_full_skirt')
+    tc_plate = tc.load_labware(name='nest_96_wellplate_200ul_pcr_full_skirt')
     
     # Pipettes setup
     p300_multi = protocol.load_instrument('p300_multi_gen2', 'left', tip_racks=[tiprack_300])
@@ -99,10 +99,6 @@ def run(protocol: protocol_api.ProtocolContext):
     p20_single = protocol.load_instrument('p20_single_gen2', 'right', tip_racks=[tiprack_20])
     
     # Step for sample prep — cell lysis at 65 deg in sample wells
-    
-    
-    
-    # Cell Lysis
     tc.set_block_temperature(65, hold_time_minutes=10) 
     tc.open_lid()
     
