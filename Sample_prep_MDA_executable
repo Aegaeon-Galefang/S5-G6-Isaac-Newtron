@@ -40,7 +40,7 @@ def run(protocol: protocol_api.ProtocolContext):
     temp_deck.set_temperature(celsius=4)
     p20_single.transfer(180, reservoir['A2'], temp_plate['A6'],
                         blow_out=True, touch_tip=True, new_tip='always')
-    p20_single.transfer(20, reservoir['A2'], temp_plate['A5'],
+    p20_single.transfer(20, reservoir['A3'], temp_plate['A5'],
                         blow_out=True, touch_tip=True, new_tip='always')
                         
     
