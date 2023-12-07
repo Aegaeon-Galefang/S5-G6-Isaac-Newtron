@@ -61,7 +61,16 @@ for i in range(2):
 protocol.delay(minutes=5)
 mag_deck.disengage()
 
-#missing: mixing beads with elution buffer
+tc.open_lid()
+p300_multi.transfer(200, tc_plate.wells('A1'), mag_plate.wells('A1'),
+                    new_tip='always', mix_after=(20,22)) #I need the elution buffer to be ready to multi transfer
+
+tc.close_lid()
+protocol.delay(minutes=5)
+mag_deck.engage(height_from_base = 5)
+protocol.delay(minutes=2)
+
+p300_multi.transfer(200, mag_plate.wells('A1'), mag_plate.wells('A3'), blow_out=True, touch_tip=True) #I need destination locations
 
 for line in protocol.commands(): 
     print(line)
