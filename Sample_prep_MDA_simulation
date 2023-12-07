@@ -43,3 +43,114 @@ p20_single = protocol.load_instrument('p20_single_gen2', 'right', tip_racks=[tip
 
 
 # Incubation at 30C for 2h, inactivation at 65C for 10min
+
+#this is inserted code for the integration of main opentrons definitions branch w/protocol
+from opentrons import simulate
+
+# Initialize the protocol simulation environment
+protocol = simulate.get_protocol_api('2.15')
+
+# Protocol metadata
+metadata = {
+    "apiLevel": "2.15",
+    "protocolName": "MDA protocol",
+}
+
+# Labware setup
+mag_deck = protocol.load_module('magnetic module', 1)
+mag_plate = mag_deck.load_labware('corning_96_wellplate_360ul_flat')
+
+sample_plate = protocol.load_labware('corning_96_wellplate_360ul_flat', 2)
+mix_plate = protocol.load_labware('corning_96_wellplate_360ul_flat', 3)
+
+temp_deck = protocol.load_module('temperature module', 4)
+temp_plate = temp_deck.load_labware('corning_96_wellplate_360ul_flat')
+
+tiprack_300 = protocol.load_labware('opentrons_96_tiprack_300ul', 5)
+tiprack_20 = protocol.load_labware('opentrons_96_tiprack_20ul', 6)
+reservoir = protocol.load_labware('corning_96_wellplate_360ul_flat', 7)
+
+# Pipettes setup
+p300_multi = protocol.load_instrument('p300_multi_gen2', 'left', tip_racks=[tiprack_300])
+p20_single = protocol.load_instrument('p20_single_gen2', 'right', tip_racks=[tiprack_20])
+
+# Sample Preparation (Assuming samples are pre-prepared in the wells)
+# ...
+
+# Cell Lysis
+#using the thermocycler instead 
+temp_deck.set_temperature(65) 
+protocol.delay(minutes=10)
+
+# MDA Reaction Setup
+for well in sample_plate.wells():
+    p20_single.transfer(20, mix_plate.wells_by_name()[well], sample_plate.wells_by_name()[well], mix_before=(3, 50))
+
+# Incubation for MDA
+
+temp_deck.set_temperature(30)
+protocol.delay(minutes=120)
+temp_deck.set_temperature(65)
+protocol.delay(minutes=10)
+
+# DNA Purification
+# Mix beads with MDA samples
+
+for well in sample_plate.wells():
+    p300_multi.mix(1.8, reservoir.wells_by_name()[well], sample_plate.wells_by_name()[well])
+
+
+# Here we incubate beads and MDA product at room temperature
+
+protocol.delay(minutes=1)
+
+# Engage magnetic module for DNA separation
+
+mag_deck.engage(height_from_base=5)
+protocol.delay(minutes=2)
+
+# Remove supernatant
+
+for well in mag_plate.wells():
+    p300_multi.aspirate(200, well)
+
+# Wash beads with 70% ethanol
+
+for i in range(2):
+    for well in mag_plate.wells():
+        
+        # Here we assuming ethanol is in 'A1' of the reservoir
+        p300_multi.dispense(200, reservoir['A1'], well) 
+    protocol.delay(minutes=2)
+    for well in mag_plate.wells():
+        p300_multi.aspirate(200, well)
+
+# Dry beads at room temperature
+protocol.delay(minutes=5)
+
+# Disengage magnetic module
+mag_deck.disengage()
+
+# Mix beads with elution buffer and incubate
+for well in mag_plate.wells():
+    p300_multi.mix(200, reservoir['A2'], well)  # Assuming elution buffer is in 'A2' of reservoir
+protocol.delay(minutes=5)
+
+# Engage magnetic module to separate DNA
+mag_deck.engage(height_from_base=5)
+protocol.delay(minutes=2)
+
+# This code is to transfer PCR products to clean wells
+# Assuming new_plate for clean wells
+new_plate = protocol.load_labware('corning_96_wellplate_360ul_flat', 8)
+for src, dest in zip(mag_plate.wells(), new_plate.wells()):
+    p300_multi.transfer(200, src, dest)
+
+# Here we finish the protocol
+
+temp_deck.deactivate()
+
+# Now print out each command for simulation purposes
+for line in protocol.commands(): 
+    print(line)
+
