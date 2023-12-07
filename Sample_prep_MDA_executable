@@ -1,11 +1,11 @@
 from opentrons import protocol_api
 
-def run(protocol: protocol_api.ProtocolContext):
-
 metadata = {
     "apiLevel": "2.15",
     "protocolName": "MDA protocol",
     }
+
+def run(protocol: protocol_api.ProtocolContext):
 
     # something to specify the number of samples?
     # use this number to multiply the buffers needed to make the MM
