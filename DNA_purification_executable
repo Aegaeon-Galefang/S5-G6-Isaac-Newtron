@@ -52,7 +52,7 @@ def run(protocol: protocol_api.ProtocolContext):
     
     #Incubating beads, engaging the magnetic deck, then allowing DNA to settle on mag beads
     protocol.delay(minutes = 1)
-    mag_deck.engage()
+    mag_deck.engage(height_from_base = 5)
     protocol.delay(minutes = 2)
     
     #Removing supernatant from the magnetic beads
@@ -84,7 +84,7 @@ def run(protocol: protocol_api.ProtocolContext):
     #incubating at room temp for 5 minutes
     tc.close_lid()
     protocol.delay(minutes=5)
-    mag_deck.engage()
+    mag_deck.engage(height_from_base = 5)
     protocol.delay(minutes=2)
 
     #Isolating purified DNA products
