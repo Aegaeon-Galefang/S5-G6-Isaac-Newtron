@@ -73,4 +73,4 @@ def run(protocol: protocol_api.ProtocolContext):
     tc.open_lid()
     
     p20_single.transfer(22, tc_plate.columns()[0], sample_plate.columns()[0],
-                        new_tip='always', blow_out=True, touch_tip=True)
+                        new_tip='always', blow_out=True, touch_tip=True) #Edit this command so that it doesnt change tips in between each aspiration on the same well
