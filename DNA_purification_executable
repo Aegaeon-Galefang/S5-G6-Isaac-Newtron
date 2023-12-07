@@ -14,7 +14,6 @@ def run(protocol: protocol_api.ProtocolContext):
     mag_plate = mag_deck.load_labware('costar3370flatbottomtransparent_96_wellplate_200ul')
     
     sample_plate = protocol.load_labware('costar3370flatbottomtransparent_96_wellplate_200ul', 2)
-    mix_plate = protocol.load_labware('costar3370flatbottomtransparent_96_wellplate_200ul', 3)
     
     tiprack_300 = protocol.load_labware('opentrons_96_tiprack_300ul', 5)
     tiprack_20 = protocol.load_labware('opentrons_96_tiprack_20ul', 6)
