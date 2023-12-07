@@ -57,7 +57,7 @@ def run(protocol: protocol_api.ProtocolContext):
     tc.set_block_temperature(65, hold_time_minutes=10) 
     tc.open_lid()
     
-    # MDA Reaction Setup
+    # MDA Reaction Setup #change this bit so that a master mix is created instead of doing both bits separately
     p20_single.transfer(18, temp_plate['A6'], tc_plate.columns()[0], new_tip='always',
                             blow_out=True, touch_tip=True)
     
