@@ -32,6 +32,34 @@ mag_deck.engage(height_from_base = 5)
 temp_deck.set_temperature(celsius=25)
 protocol.delay(minutes=5)
 
+#DNA purification
+bead_volume = 1.8*22 #bead ratio multipled by sample volume
+p300_multi.transfer(bead_volume, reservoir.wells('A1'), mag_plate.wells('A1'), #where are the beads? where are the MDA samples?
+                    touch_tip=True, blow_out=True, new_tip='always', 
+                    mix_before=(5,22), mix_after=(10,22))
+
+protocol.delay(minutes = 1)
+mag_deck.engage(height_from_base = 5)
+protocol.delay(minutes = 2)
+
+p300_multi.flow_rate.aspirate = 25 #aspirate slowly to avoid aspirating beads
+p300_multi.transfer(bead_volume+22, mag_plate.wells('A1'), mag_plate.wells('A2'), blow_out=True) #dispose this liquid waste somewhere else?
+
+air_volume = p300_multi.max_volume * 0.1 #adding air gap to prevent dripping of ethanol
+
+for i in range(2):
+    p300_multi.pick_up_tip()
+    p300_multi.transfer(200, reservoir.wells('A2'), mag_plate.wells('A1'), 
+                        air_gap=air_volume, new_tip='never')
+    protocol.delay(minutes=0.5) #adding gap to prevent drip anywhere else
+    p300_multi.transfer(200, mag_plate.wells('A1'), mag_plate.wells('A2'), 
+                        new_tip='never')   
+    p300_multi.drop_tip()
+
+protocol.delay(minutes=5)
+mag_deck.disengage()
+
+#missing: mixing beads with elution buffer
 
 for line in protocol.commands(): 
     print(line)
