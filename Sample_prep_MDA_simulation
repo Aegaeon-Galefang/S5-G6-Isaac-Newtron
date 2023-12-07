@@ -75,57 +75,5 @@ p20_single.transfer(22, tc_plate.columns()[0], sample_plate.columns()[0],
 
 # Now print out each command for simulation purposes
 for line in protocol.commands(): 
-    print(line)#labware
-mag_deck = protocol.load_module('magnetic module', 1)
-#mag_adapter = mag_deck.load_adapter('opentrons_96_flat_bottom_adapter')
-mag_plate = mag_deck.load_labware('corning_96_wellplate_360ul_flat')
-
-
-sample_plate = protocol.load_labware(
-    'corning_96_wellplate_360ul_flat', 2)
-mix_plate = protocol.load_labware('corning_96_wellplate_360ul_flat', 3)
-
-temp_deck = protocol.load_module('temperature module', 4)
-#temp_adapter = temp_deck.load_adapter('opentrons_96_flat_bottom_adapter')
-temp_plate = temp_deck.load_labware('corning_96_wellplate_360ul_flat')
-
-tiprack_300 = protocol.load_labware('opentrons_96_tiprack_300ul', 5)
-tiprack_20 = protocol.load_labware('opentrons_96_tiprack_20ul', 6)
-reservoir = protocol.load_labware('corning_96_wellplate_360ul_flat', 7)
-
-#pipettes
-p300_multi = protocol.load_instrument('p300_multi_gen2', 'left', tip_racks=[tiprack_300])
-p20_single = protocol.load_instrument('p20_single_gen2', 'right', tip_racks=[tiprack_20])
-
-# Step for sample prep — cell lysis at 65 deg in sample wells
-
-
-
-# Cell Lysis
-tc.set_block_temperature(65, hold_time_minutes=10) 
-tc.open_lid()
-
-# MDA Reaction Setup
-p20_single.transfer(18, mix_plate.columns()[0], mix_plate.columns()[1])
-
-for i in range(1):
-    p20_single.transfer(20, mix_plate.columns()[i], tc_plate.columns()[i],
-                        mix_before=(3, 11), mix_after=(3, 11), new_tip='always',
-                        blow_out=True, touch_tip=True)
-    
-tc.close_lid()
-
-# Incubation for MDA
-tc.set_block_temperature(30, hold_time_minutes = 2)
-tc.set_block_temperature(65, hold_time_minutes = 1)
-
-tc.open_lid()
-
-#Moving MDA reactions to sample plate for DNA purification
-p20_single.transfer(22, tc_plate.columns()[0], sample_plate.columns()[0],
-                    new_tip='always', blow_out=True, touch_tip=True)
-
-# Now print out each command for simulation purposes
-for line in protocol.commands(): 
     print(line)
 
