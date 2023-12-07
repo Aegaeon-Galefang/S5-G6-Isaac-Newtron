@@ -15,10 +15,6 @@ mag_plate = mag_deck.load_labware('corning_96_wellplate_360ul_flat')
 sample_plate = protocol.load_labware('corning_96_wellplate_360ul_flat', 2)
 mix_plate = protocol.load_labware('corning_96_wellplate_360ul_flat', 3)
 
-temp_deck = protocol.load_module('temperature module', 4)
-#temp_adapter = temp_deck.load_adapter('opentrons_96_flat_bottom_adapter')
-temp_plate = temp_deck.load_labware('corning_96_wellplate_360ul_flat')
-
 tiprack_300 = protocol.load_labware('opentrons_96_tiprack_300ul', 5)
 tiprack_20 = protocol.load_labware('opentrons_96_tiprack_20ul', 6)
 reservoir = protocol.load_labware('corning_96_wellplate_360ul_flat', 9)
