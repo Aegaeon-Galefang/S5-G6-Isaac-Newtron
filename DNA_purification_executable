@@ -87,6 +87,6 @@ def run(protocol: protocol_api.ProtocolContext):
     mag_deck.engage()
     protocol.delay(minutes=2)
 
-#Isolating purified DNA products
-p300_multi.transfer(200, mag_plate.wells('A1'), mag_plate.wells('A2'), blow_out=True, touch_tip=True)
+    #Isolating purified DNA products
+    p300_multi.transfer(200, mag_plate.wells('A1'), mag_plate.wells('A2'), blow_out=True, touch_tip=True)
 
