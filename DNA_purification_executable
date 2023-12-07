@@ -2,7 +2,7 @@ from opentrons import protocol_api
 
 metadata = {
     "apiLevel": "2.15",
-    "protocolName": "MDA protocol",
+    "protocolName": "DNA Purification protocol",
     }
 
 def run(protocol: protocol_api.ProtocolContext):
@@ -26,7 +26,7 @@ def run(protocol: protocol_api.ProtocolContext):
     #A6 = Elution buffer
     #A7 = Liquid waste
     tc = protocol.load_module('thermocycler')
-    tc_plate = tc.load_labware(name='nest_96_wellplate_100ul_pcr_flat')
+    tc_plate = tc.load_labware(name='nest_96_wellplate_200ul_flat')
     
     #pipettes
     p300_multi = protocol.load_instrument('p300_multi_gen2', 'left', tip_racks=[tiprack_300])
