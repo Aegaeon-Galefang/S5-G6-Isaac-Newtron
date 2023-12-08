@@ -26,7 +26,7 @@ def run(protocol: protocol_api.ProtocolContext):
     #A6 = Elution buffer
     #A7 = Liquid waste
     tc = protocol.load_module('thermocycler')
-    tc_plate = tc.load_labware(name='4ti_0960rig_pcr_plate_200ul')
+    tc_plate = tc.load_labware(name='4ti0960rig_96_wellplate_200ul')
     
     #pipettes
     p300_multi = protocol.load_instrument('p300_multi_gen2', 'left', tip_racks=[tiprack_300])
