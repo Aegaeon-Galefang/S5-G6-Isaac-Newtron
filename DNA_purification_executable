@@ -69,7 +69,7 @@ def run(protocol: protocol_api.ProtocolContext):
                             air_gap=air_volume, new_tip='never')
         protocol.delay(minutes=0.5) #adding gap to prevent drip anywhere else
         p300_multi.transfer(200, mag_plate.wells('A1'), reservoir.wells('A7'), 
-                            new_tip='never')   
+                            air_gap=air_volume, new_tip='never')   
         p300_multi.drop_tip()
     
     #Allowing beads to try at room temperature
