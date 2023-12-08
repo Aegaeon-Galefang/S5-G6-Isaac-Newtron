@@ -37,7 +37,9 @@ def run(protocol: protocol_api.ProtocolContext):
     
     #Preparing warmth for elution buffer
     tc.set_block_temperature(temperature=55)
-    tc_plate[].bottom(z=1)
+    for i in range(12):
+        for j in range(8):
+            tc_plate.columns()[i][j].bottom(z=1)
     tc.open_lid()
     p300_multi.transfer(200, reservoir.wells('A6'), tc_plate.wells('A12'),
                         touch_tip=True, blow_out=True)
