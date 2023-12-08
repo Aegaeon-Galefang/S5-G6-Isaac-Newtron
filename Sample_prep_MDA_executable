@@ -63,7 +63,6 @@ def run(protocol: protocol_api.ProtocolContext):
     p20_single.transfer(20, temp_plate['A6'], tc_plate.columns()[0], new_tip='always',
                         mix_before=(3,10), mix_after=(3, 11), blow_out=True, touch_tip=True)
 
-    p20_single.configure_for_volume()
     tc.close_lid()
     
     # Incubation for MDA
