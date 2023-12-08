@@ -72,7 +72,7 @@ def run(protocol: protocol_api.ProtocolContext):
     tc.open_lid()
 
     for i in range(1):
-        column_tc = tc_plate.column(i)
+        column_tc = tc_plate.columns(i)
         column_sample = sample_plate.columns(i)
         p20_single.transfer(22, column_tc.wells('1', to='8'), column_sample.wells('1', to='8'),
                             new_tip='once', blow_out=True, touch_tip=True)
