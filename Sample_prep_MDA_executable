@@ -19,7 +19,6 @@ def run(protocol: protocol_api.ProtocolContext):
     tiprack_300 = protocol.load_labware('opentrons_96_tiprack_300ul', 5)
     tiprack_20 = protocol.load_labware('opentrons_96_tiprack_20ul', 6)
     reservoir = protocol.load_labware('4ti0131_12_reservoir_21000ul', 9)
-    #A1 = cell + media
     #A2 = MDA Reaction buffer
     #A3 = Enzyme mixture
     #A4 = Beads
@@ -44,14 +43,6 @@ def run(protocol: protocol_api.ProtocolContext):
     p20_single.drop_tip()
     p20_single.transfer(20, reservoir['A3'], temp_plate['A6'],
                         blow_out=True, touch_tip=True, new_tip='always')
-                        
-    
-    #transferring cell + media
-    tc.open_lid()
-    p20_single.transfer(2, reservoir['A1'], tc_plate.columns()[0],
-                        blow_out=True, touch_tip=True, new_tip='always')
-    
-    tc.close_lid()
     
     # Cell Lysis
     tc.set_block_temperature(65, hold_time_minutes=10) 
