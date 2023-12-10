@@ -1,5 +1,19 @@
-what code is: what the whole protocol is meant to be doing 
+README for Opentrons Automation of whole genome Multiple Displacement Amplification (MDA) in single cells using opentron
+These Scripts are designed to streamline the MDA protocol in an opentron.
+The MDA protocol amplifies DNA from single cells for tasks like forensic analysis
 
-what files are included:what files in folder; unable to run mag module and temp module and pcr = had to swap out modules/create 2 scripts (ie. executable, simulation , 2 scripts per each= 4 scripts in total; what order each has to be ran in 
+PROTOCOL DESCRIPTION:
+The MDA protocol consists of 3 stages. A sample preparation stage, a DNA amplification stage, and a purification stage.
+Our team has automated the protocol with 4 scripts total due to the limited space in the opentron.
 
-specific techniqes that need to be covered: to do to make it viable in practical setting; temp in mda; change temperature = changed temp so didnt have to wait 2 hours ,etc ; delete step for single cell, would still be usable either way if using red blood cell or multiple cells from reservoir 
+We have 2 Executable Scripts and 2 Simulation Scripts: 
+1) The sample_prep script ran first automates the sample prep/MDA part of the protocol.
+2) The dna_purification script ran second automates the purification protocol.
+
+
+Notes: 
+1) Make sure to calibrate the opentron
+2) We did not use the correct temperature as the protocol since it took too long and we weren't actually using any reagents or enzymes.
+3) We deleted the step for the single cell picking.
+
+-------------------
