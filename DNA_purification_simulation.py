@@ -13,7 +13,6 @@ mag_adapter = mag_deck.load_adapter('opentrons_96_flat_bottom_adapter')
 mag_plate = mag_deck.load_labware('corning_96_wellplate_360ul_flat')
 
 sample_plate = protocol.load_labware('corning_96_wellplate_360ul_flat', 2)
-mix_plate = protocol.load_labware('corning_96_wellplate_360ul_flat', 3)
 
 tiprack_300 = protocol.load_labware('opentrons_96_tiprack_300ul', 5)
 tiprack_20 = protocol.load_labware('opentrons_96_tiprack_20ul', 6)
@@ -38,7 +37,7 @@ p20_single = protocol.load_instrument('p20_single_gen2', 'right', tip_racks=[tip
 #Preparing warmth for elution buffer
 tc.set_block_temperature(temperature=55)
 tc.open_lid()
-p300_multi.transfer(200, reservoir.wells('A6'), tc_plate.wells('A12'),
+p300_multi.transfer(100, reservoir.wells('A6'), tc_plate.wells('A12'),
                     touch_tip=True, blow_out=True)
 tc.close_lid()
 
@@ -52,7 +51,7 @@ p300_multi.transfer(bead_volume+22+5, sample_plate.wells('A1'), mag_plate.wells(
 
 #Incubating beads, engaging the magnetic deck, then allowing DNA to settle on mag beads
 protocol.delay(minutes = 1)
-mag_deck.engage(height_from_base = 5)
+mag_deck.engage(height_from_base = 0)
 protocol.delay(minutes = 2)
 
 #Removing supernatant from the magnetic beads
@@ -69,7 +68,7 @@ for i in range(2):
                         air_gap=air_volume, new_tip='never')
     protocol.delay(minutes=0.5) #adding gap to prevent drip anywhere else
     p300_multi.transfer(200, mag_plate.wells('A1'), reservoir.wells('A7'), 
-                        new_tip='never')   
+                        air_gap=air_volume, new_tip='never')   
     p300_multi.drop_tip()
 
 #Allowing beads to try at room temperature
@@ -78,17 +77,17 @@ mag_deck.disengage()
 
 #Mixing beads with the elution buffer
 tc.open_lid()
-p300_multi.transfer(200, tc_plate.wells('A12'), mag_plate.wells('A1'),
+p300_multi.transfer(100, tc_plate.wells('A12'), mag_plate.wells('A1'),
                     new_tip='always',blow_out=True,  mix_after=(10,50))
 
 #incubating at room temp for 5 minutes
 tc.close_lid()
 protocol.delay(minutes=5)
-mag_deck.engage(height_from_base = 5)
+mag_deck.engage(height_from_base = 0)
 protocol.delay(minutes=2)
 
 #Isolating purified DNA products
-p300_multi.transfer(200, mag_plate.wells('A1'), mag_plate.wells('A2'), blow_out=True, touch_tip=True)
+p300_multi.transfer(100, mag_plate.wells('A1'), mag_plate.wells('A2'), blow_out=True, touch_tip=True)
 
 for line in protocol.commands(): 
     print(line)
