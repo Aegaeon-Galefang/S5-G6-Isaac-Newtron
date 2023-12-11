@@ -45,7 +45,7 @@ tc.close_lid()
 tc.set_block_temperature(65, hold_time_minutes=10) 
 tc.open_lid()
 
- # MDA Reaction Setup #change this bit so that a master mix is created instead of doing both bits separately
+ # MDA Reaction Setup
 p20_single.flow_rate.aspirate = 25
 p20_single.flow_rate.dispense = 25
 p20_single.transfer(20, temp_plate['A6'], tc_plate.columns()[0], new_tip='always',
