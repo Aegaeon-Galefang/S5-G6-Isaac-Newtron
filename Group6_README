@@ -12,6 +12,9 @@ of the reagents (enzymes and buffers) with the DNA sample, followed by the ampli
 2) The dna_purification script automates the purification part to isolate high-quality DNA from the amplification. Quantification 
 of DNA concentration is meant to be done via Nanodrop. 
 
+The protocol is designed to amplify at most 8 samples (but aim to use at least 1 positive/negative control) due to equipment 
+constraints; the p20-single can be swapped out for a p20-multi to handle more samples.
+
 Notes: 
 1) Make sure to calibrate the Opentron, particularly the Z-axis.
 2) When conducting the wet runs, the correct temperatures and incubation times were not used as they took too long, and no 
