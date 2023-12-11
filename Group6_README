@@ -4,7 +4,8 @@ designed to streamline the MDA protocol by introducing automation.
 
 PROTOCOL DESCRIPTION:
 The MDA protocol consists of 3 stages— a sample preparation stage, a DNA amplification stage, and a purification stage.
-Our team has automated the protocol with 4 scripts total due to the limited space in the Opentron.
+Our team has automated the protocol with 4 scripts total due to the limited space in the Opentron deck. The temperature modules, 
+magnetic modules, and thermocycler are unable to be plugged in at the same time.
 
 We have 2 Executable Scripts and 2 Simulation Scripts: 
 1) The sample_prep script ran first automates the protocol's sample prep/MDA part. This involves the preparation and mixing 
