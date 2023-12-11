@@ -54,8 +54,8 @@ p20_single.transfer(20, temp_plate['A6'], tc_plate.columns()[0], new_tip='always
 tc.close_lid()
 
 # Incubation for MDA
-tc.set_block_temperature(30, hold_time_minutes = 2)
-tc.set_block_temperature(65, hold_time_minutes = 1)
+tc.set_block_temperature(30, hold_time_minutes = 2) # in actual execution, should be 2 hours (120 mins)
+tc.set_block_temperature(65, hold_time_minutes = 1) # in actual execution, should be 10 mins
 
 tc.open_lid()
 
