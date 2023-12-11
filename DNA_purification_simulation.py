@@ -17,7 +17,6 @@ sample_plate = protocol.load_labware('corning_96_wellplate_360ul_flat', 2)
 tiprack_300 = protocol.load_labware('opentrons_96_tiprack_300ul', 5)
 tiprack_20 = protocol.load_labware('opentrons_96_tiprack_20ul', 6)
 reservoir = protocol.load_labware('corning_96_wellplate_360ul_flat', 9)
-#A1 = cell + media
 #A2 = MDA Reaction buffer
 #A3 = Enzyme mixture
 #A4 = Beads
