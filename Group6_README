@@ -14,7 +14,8 @@ of the reagents (enzymes and buffers) with the DNA sample, followed by the ampli
 of DNA concentration is meant to be done via Nanodrop. 
 
 The protocol is designed to amplify at most 8 samples (but aim to use at least 1 positive/negative control) due to equipment 
-constraints; the p20-single can be swapped out for a p20-multi to handle more samples.
+constraints; the p20-single can be swapped out for a p20-multi to handle more samples. The results of the purification will
+be located in column 2 of the well plate on the magnetic deck. 
 
 Notes: 
 1) Make sure to calibrate the Opentron, particularly the Z-axis.
