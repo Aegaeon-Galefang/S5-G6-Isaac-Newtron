@@ -6,10 +6,7 @@ metadata = {
     }
 
 def run(protocol: protocol_api.ProtocolContext):
-
-    # something to specify the number of samples?
-    # use this number to multiply the buffers needed to make the MM
-    
+  
     # Labware setup
     sample_plate = protocol.load_labware('costar3370flatbottomtransparent_96_wellplate_200ul', 2)
     
@@ -50,7 +47,7 @@ def run(protocol: protocol_api.ProtocolContext):
     tc.set_block_temperature(65, hold_time_minutes=10) 
     tc.open_lid()
     
-    # MDA Reaction Setup #change this bit so that a master mix is created instead of doing both bits separately
+    # MDA Reaction Setup 
     p20_single.flow_rate.aspirate = 25
     p20_single.flow_rate.dispense = 25
     p20_single.transfer(20, temp_plate['A6'], tc_plate.columns()[0], new_tip='always',
